@@ -6,7 +6,8 @@
 |--|--|
 |[layaAir2](./demo/layaair2/)|layaAir2 引擎示例|
 |[cocos](./demo/cocos/)|cocos 引擎示例|
-|[unity](./demo/unity2022/)|unity 引擎示例|
+|[unity2022](./demo/unity2022/)|unity2022 引擎示例|
+|[unity2021](./demo/unity2021/)|unity2021 引擎示例|
 
 ### 接入文档
 [99试玩平台接入指南](https://nqcq9c7h9mm.feishu.cn/wiki/L239wr4Pdi4kbZkUowjc5r4FnWc)

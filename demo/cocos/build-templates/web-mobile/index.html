@@ -79,6 +79,14 @@
     }
 
     loadScript(debug ? 'cocos2d-js.js' : 'cocos2d-js-min.js', function () {
+
+      // 覆盖 cocos 存储
+      cc.sys.localStorage = {}
+      cc.sys.localStorage.getItem = SecSDK.storage.get
+      cc.sys.localStorage.setItem = SecSDK.storage.set
+      cc.sys.localStorage.removeItem = SecSDK.storage.remove
+      cc.sys.localStorage.clear = SecSDK.storage.clear
+
       if (CC_PHYSICS_BUILTIN || CC_PHYSICS_CANNON) {
         loadScript(debug ? 'physics.js' : 'physics-min.js', window.boot);
       }

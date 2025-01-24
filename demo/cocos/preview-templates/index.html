@@ -1,0 +1,30 @@
+<html>
+<head>
+  <link rel="icon" href="app/editor/static/preview-templates/favicon.ico"></link>
+  <meta charset="utf-8">
+  <title><%=title%></title>
+  <link rel="stylesheet" type="text/css" href="style.css"/>
+  <script src="https://wzcdn.zhuomiles.com/npm/@99sw/sec-sdk/sec-sdk.umd.js"></script>
+</head>
+<body>
+  <canvas id="GameCanvas" oncontextmenu="event.preventDefault()" tabindex="0"></canvas>
+  <div id="splash">
+    <div class="progress-bar stripes">
+      <span style="width: 0%"></span>
+    </div>
+  </div>
+<script src="settings.js" charset="utf-8"></script>
+<script src="boot.js" charset="utf-8"></script>
+<script src="/socket.io/socket.io.js" charset="utf-8"></script>
+<script src="app/engine/bin/<%=cocos2d%>" charset="utf-8"></script>
+<script src="preview-scripts/__quick_compile__.js" charset="utf-8"></script>
+<script>
+// 覆盖cocos存储
+cc.sys.localStorage = {}
+cc.sys.localStorage.getItem = SecSDK.storage.get
+cc.sys.localStorage.setItem = SecSDK.storage.set
+cc.sys.localStorage.removeItem = SecSDK.storage.remove
+cc.sys.localStorage.clear = SecSDK.storage.clear
+</script>
+</body>
+</html>

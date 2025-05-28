@@ -9,3 +9,4 @@
 3. Unity 调用函数
 - [./Assets/Scripts/CanvasCreator.cs](./Assets/Scripts/CanvasCreator.cs)
 
+4. Build 时选择 WebGL 平台 SecExampleTemplate 模版

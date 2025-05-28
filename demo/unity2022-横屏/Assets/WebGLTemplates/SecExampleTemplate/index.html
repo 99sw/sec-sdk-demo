@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style>
+        /* 横屏旋转样式 */
+        .landscape-screen {
+            transform-origin: top left;
+            transform: rotate(90deg) translateY(-100%);
+        }
+        
+        /* 防止iOS弹性滚动 */
+        body {
+            margin: 0;
+            overflow: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* iframe容器样式 */
+        #frame-container {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+  	<script>window.__SEC_SDK__PROXY_WIN__=true</script>
+</head>
+<body>
+    <div id="frame-container">
+        <iframe id="unity-frame" 
+                src="./source.html" 
+                frameborder="0" 
+                scrolling="no"
+                allow="fullscreen"
+                style="width: 100%; height: 100%"></iframe>
+    </div>
+
+    <script>
+        const frame = document.getElementById('unity-frame');
+        const container = document.getElementById('frame-container');
+
+        // 初始方向检测
+        function checkOrientation() {
+            const orientation = window.orientation;
+            
+            if (Math.abs(orientation) === 90) {
+                // 横屏模式
+                frame.classList.remove('landscape-screen');
+                frame.style.width = window.innerWidth + 'px';
+                frame.style.height = window.innerHeight + 'px';
+            } else {
+                // 竖屏模式（强制横屏）
+                frame.classList.add('landscape-screen');
+                frame.style.width = window.innerHeight + 'px';
+                frame.style.height = window.innerWidth + 'px';
+            }
+        }
+
+        // 方向变化监听
+        window.addEventListener('orientationchange', () => {
+            checkOrientation();
+            setTimeout(checkOrientation, 500); // 延迟二次检查确保生效
+        });
+
+        // 全屏状态变化监听
+        document.addEventListener('fullscreenchange', () => {
+            if (document.fullscreenElement) {
+                frame.style.pointerEvents = 'auto'; // 解决全屏点击失效问题[2](@ref)
+                frame.style.zIndex = 1000;         // 确保层级在最前[2](@ref)
+            }
+        });
+
+        // 初始加载执行
+        checkOrientation();
+        window.onload = checkOrientation;
+
+        // iOS弹性滚动限制
+        document.body.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+    </script>
+</body>
+</html>
